@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+
+        <p:dialog id="MovieViewDlg" widgetVar="MovieViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewMovieTitle}">
+
+            <h:form id="MovieViewForm" class="ui-datatable-data">
+                
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="columnOne, columnTwo" rendered="#{movieController.selected != null}">
+                        
+                        <!-- No need for the user to be concerned about the database Primary Key id, 
+                        which is auto-generated on the server side.
+                        
+                        <h:outputText value="#{bundle.ViewMovieLabel_id}"/>
+                        <h:outputText value="#{movieController.selected.id}" title="#{bundle.ViewMovieTitle_id}"/>
+                        -->
+                        
+                        <h:outputText value="#{bundle.ViewMovieLabel_title}"/>
+                        <h:outputText value="#{movieController.selected.title}" title="#{bundle.ViewMovieTitle_title}"/>
+
+                        <h:outputText value="#{bundle.ViewMovieLabel_genres}"/>
+                        <h:outputText value="#{movieController.selected.genres}" title="#{bundle.ViewMovieTitle_genres}"/>
+
+                        <h:outputText value="#{bundle.ViewMovieLabel_releaseDate}"/>
+                        <h:outputText value="#{movieController.selected.releaseDate}" title="#{bundle.ViewMovieTitle_releaseDate}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+
+                        <h:outputText value="#{bundle.ViewMovieLabel_director}"/>
+                        <h:outputText value="#{movieController.selected.director}" title="#{bundle.ViewMovieTitle_director}"/>
+
+                        <h:outputText value="#{bundle.ViewMovieLabel_stars}"/>
+                        <h:outputText value="#{movieController.selected.stars}" title="#{bundle.ViewMovieTitle_stars}"/>
+
+                        <h:outputText value="#{bundle.ViewMovieLabel_filmRating}"/>
+                        <h:outputText value="#{movieController.selected.filmRating}" title="#{bundle.ViewMovieTitle_filmRating}"/>
+
+                        <h:outputText value="#{bundle.ViewMovieLabel_percentLiked}"/>
+                        <h:outputText value="#{movieController.selected.percentLiked}" title="#{bundle.ViewMovieTitle_percentLiked}"/>
+                    </p:panelGrid>
+                </h:panelGroup>
+                
+                <h:panelGroup>
+                    <p:spacer height="10"/> 
+                    <div align="center">
+                        <!-- CLOSE button -->
+                        <p:commandButton value="#{bundle.Close}" onclick="MovieViewDialog.hide()" styleClass="commandButton" icon="ui-icon-close"/>
+                    </div>
+                </h:panelGroup>
+                
+            </h:form>
+
+        </p:dialog>
+    </ui:composition>
+</html>

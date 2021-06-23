@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MovieEditDlg" widgetVar="MovieEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditMovieTitle}">
+            
+            <h:form id="MovieEditForm" class="ui-datatable-data">
+                
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" columnClasses="columnOne, columnTwo" rendered="#{movieController.selected != null}">
+
+                        <!-- No need for the user to be concerned about the database Primary Key id, 
+                        which is auto-generated on the server side.
+                        
+                        <p:outputLabel value="#{bundle.EditMovieLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{movieController.selected.id}" 
+                        title="#{bundle.EditMovieTitle_id}" required="true" 
+                        requiredMessage="#{bundle.EditMovieRequiredMessage_id}"/>
+                        -->
+
+                        <p:outputLabel value="#{bundle.EditMovieLabel_title}" for="title" />
+                        <p:inputText id="title" class="dataFields" value="#{movieController.selected.title}" 
+                                     title="#{bundle.EditMovieTitle_title}" required="true" 
+                                     requiredMessage="#{bundle.EditMovieRequiredMessage_title}"/>
+                        
+                        <p:outputLabel value="#{bundle.EditMovieLabel_genres}" for="genres" />
+                        <p:inputText id="genres" class="dataFields" value="#{movieController.selected.genres}" 
+                                     title="#{bundle.EditMovieTitle_genres}" required="true" 
+                                     requiredMessage="#{bundle.EditMovieRequiredMessage_genres}"/>
+                        
+                        <p:outputLabel value="#{bundle.EditMovieLabel_releaseDate}" for="releaseDate" />
+                        <p:calendar id="releaseDate" pattern="MM/dd/yyyy" class="dataFields" value="#{movieController.selected.releaseDate}" 
+                                    title="#{bundle.EditMovieTitle_releaseDate}" required="true" 
+                                    requiredMessage="#{bundle.EditMovieRequiredMessage_releaseDate}" showOn="button"/>
+                        
+                        <p:outputLabel value="#{bundle.EditMovieLabel_director}" for="director" />
+                        <p:inputText id="director" class="dataFields" value="#{movieController.selected.director}" 
+                                     title="#{bundle.EditMovieTitle_director}" required="true" 
+                                     requiredMessage="#{bundle.EditMovieRequiredMessage_director}"/>
+                        
+                        <p:outputLabel value="#{bundle.EditMovieLabel_stars}" for="stars" />
+                        <p:inputText id="stars" class="dataFields" value="#{movieController.selected.stars}" 
+                                     title="#{bundle.EditMovieTitle_stars}" required="true" 
+                                     requiredMessage="#{bundle.EditMovieRequiredMessage_stars}"/>
+                        
+                        <p:outputLabel value="#{bundle.EditMovieLabel_filmRating}" for="filmRating" />
+                        <p:inputText id="filmRating" class="dataFields" value="#{movieController.selected.filmRating}" 
+                                     title="#{bundle.EditMovieTitle_filmRating}" required="true" 
+                                     requiredMessage="#{bundle.EditMovieRequiredMessage_filmRating}"/>
+                        
+                        <p:outputLabel value="#{bundle.EditMovieLabel_percentLiked}" for="percentLiked" />
+                        <p:inputText id="percentLiked" class="dataFields" value="#{movieController.selected.percentLiked}" 
+                                     title="#{bundle.EditMovieTitle_percentLiked}" required="true" 
+                                     requiredMessage="#{bundle.EditMovieRequiredMessage_percentLiked}"/>
+                    </p:panelGrid>
+                </h:panelGroup>
+                
+                <h:panelGroup>
+                    <p:spacer height="10"/> 
+                    <div align="center">
+                        <!-- SAVE button -->
+                        <p:commandButton actionListener="#{movieController.update}" value="#{bundle.Save}" 
+                                         styleClass="commandButton" icon="ui-icon-disk" ajax="false"
+                                         update="display,:MovieListForm:datalist,:growl" 
+                                         oncomplete="handleSubmit(args, 'MovieEditDialog');"/>
+                        &nbsp;
+                        <!-- CANCEL button -->
+                        <p:commandButton value="#{bundle.Cancel}" onclick="PF('MovieEditDialog').hide()" 
+                                         styleClass="commandButton" icon="ui-icon-cancel"/>
+                    </div>
+                </h:panelGroup>
+
+            </h:form>
+            
+        </p:dialog>
+    </ui:composition>
+</html>
